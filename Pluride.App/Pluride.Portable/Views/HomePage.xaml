@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pluride.App.Portable.Views.HomePage"
+             Icon="icon-party.png"
+             Title="Eventos"
+             IsBusy="{Binding IsBusy}">
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1">
+                <ListView
+					x:Name="ListViewEvents"
+					ItemsSource="{Binding Events}"
+					HasUnevenRows="True" 
+					SeparatorVisibility="Default"
+                    SeparatorColor="White"
+					CachingStrategy="RecycleElement"
+					BackgroundColor="White"
+                    IsPullToRefreshEnabled="{Binding IsNotBusy}"
+                    RefreshCommand="{Binding LoadEventsCommand}"
+                    IsVisible="{Binding IsNotBusy}"
+                    IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                    ItemSelected="OnItemSelected"
+                    AbsoluteLayout.LayoutFlags="All" 
+                    AbsoluteLayout.LayoutBounds="0,0,1,1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Image HeightRequest="180" Aspect="AspectFill">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Picture}"
+                                                        CacheValidity="14"
+                                                        CachingEnabled="true"/>
+                                    </Image.Source>
+                                </Image>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout IsVisible="{Binding IsBusy}"
+                                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                    <StackLayout.Orientation>
+                        <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                    </StackLayout.Orientation>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" >
+                        <ActivityIndicator.Color>
+                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                        </ActivityIndicator.Color>
+                    </ActivityIndicator>
+                    <Label Text="Carregando Eventos..." HorizontalOptions="Center" Style="{DynamicResource PlurideListItemTextStyle}"/>
+                </StackLayout>
+            </AbsoluteLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

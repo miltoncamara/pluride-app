@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pluride.App.Portable.Views.RideDetailsPage"
+             xmlns:local="clr-namespace:Pluride.App.Portable.Controls;assembly=Pluride.App.Portable"
+             xmlns:converters="clr-namespace:Pluride.App.Portable.Converters;assembly=Pluride.App.Portable"
+             xmlns:imagecircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             Title="Informações">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="EventImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" x:Name="Row1Header"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid RowSpacing="0" ColumnSpacing="0" x:Name="HeaderView" BackgroundColor="{DynamicResource Primary}">
+            <Image
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Source="{Binding Ride.User.Picture, Converter={StaticResource EventImageConverter}}"
+                Aspect="AspectFill"/>
+        </Grid>
+        <local:ParalaxScrollView x:Name="MainScroll" Grid.RowSpan="2">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200" x:Name="Row1Content"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="MainStack"
+                     VerticalOptions="End"
+                     HorizontalOptions="FillAndExpand">
+                    <Image Source="profile_pic_shadow.png" 
+                           Aspect="AspectFill"
+                           HorizontalOptions="FillAndExpand" 
+                           VerticalOptions="FillAndExpand"/>
+                    <StackLayout
+                         Padding="{StaticResource StandardPadding}"
+                         Spacing="0"
+                         VerticalOptions="End"
+                         HorizontalOptions="FillAndExpand">
+                        <Label
+                            x:Name="LblEventName"
+                            Text="{Binding Event.Name}"
+                            FontSize="18"
+                            TextColor="White">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Android="sans-serif-light" iOS="HelveticaNeue-Light"/>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label
+                            x:Name="SpeakerTitle"
+                            Text="{Binding Event.DepartureDateTime}"
+                            FontSize="12"
+                            TextColor="White"/>
+                    </StackLayout>
+                </Grid>
+                <StackLayout Grid.Row="1" Spacing="0">
+                    <StackLayout BackgroundColor="{DynamicResource WindowBackgroundTable}"
+                                 Spacing="{DynamicResource CardSpacing}"
+                                 Padding="{DynamicResource CardPadding}">
+                        <!--Biography-->
+                        <local:CardView>
+                            <StackLayout Spacing="0">
+                                <local:LabelSection Text="Informações"/>
+                                <local:HeaderDivider/>
+                                <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="White">
+                                    <Label Text="{Binding Event.Description}" Style="{DynamicResource EvolveListItemTextStyle}"/>
+                                </StackLayout>
+                                <local:FooterDivider/>
+                            </StackLayout>
+                        </local:CardView>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </local:ParalaxScrollView>
+    </Grid>
+</ContentPage>

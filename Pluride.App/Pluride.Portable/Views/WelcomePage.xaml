@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pluride.App.Portable.Views.WelcomePage">
+    <AbsoluteLayout>
+        <Image Source="bck_welcome.png" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All" />
+        <StackLayout AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All">
+            <Image 
+				x:Name="ImgLogo"
+                Scale="0.5"
+				Source="logo_white.png"
+				VerticalOptions="CenterAndExpand"
+				HorizontalOptions="Center">
+            </Image>
+            <Grid VerticalOptions="EndAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout VerticalOptions="End" Grid.Row="1" Grid.Column="0" Padding="10">
+                    <Label Text="Entrar com" TextColor="White" HorizontalOptions="Center">
+                    </Label>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Text="Facebook" Style="{StaticResource FacebookButton}" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" Command="{Binding FacebookLoginCommand}">
+                        </Button>
+                        <Button Text="Email" 
+							Command="{Binding EmailLoginCommand}" 
+							BackgroundColor="Transparent" 
+							TextColor="White" 
+							BorderColor="White" 
+							BorderWidth="1" 
+							Grid.Row="1" 
+							Grid.Column="0">
+                        </Button>
+                        <Button 
+							Text="Cadastro" 
+							BackgroundColor="Transparent" 
+							TextColor="White" 
+							BorderColor="White" 
+							BorderWidth="1" 
+							Grid.Row="1" 
+							Grid.Column="1">
+                        </Button>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>
